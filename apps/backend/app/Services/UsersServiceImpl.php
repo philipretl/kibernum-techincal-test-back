@@ -19,9 +19,13 @@ class UsersServiceImpl implements UsersService{
     public function saveUser(array $data): User
     {
         $data = $this->users_service_handler->saveUserInExternalService($data);
-        $user = new User;
 
-        return $user;
+        return new User(
+            $data->id,
+            $data->name,
+            $data->avatar,
+            $data->createdAt
+        );
     }
 
     public function listUsers(): Collection
@@ -30,12 +34,13 @@ class UsersServiceImpl implements UsersService{
         $users_list_unmapped = $this->users_service_handler->getListFromExternalService();
 
         foreach ($users_list_unmapped as $user_unmapped){
-            array_push($users_list, new User(
-                $user_unmapped->name,
-                $user_unmapped->createdAt,
+            $user = new User(
                 $user_unmapped->id,
-                $user_unmapped->avatar
-            ));
+                $user_unmapped->name,
+                $user_unmapped->avatar,
+                $user_unmapped->createdAt
+            );
+            array_push($users_list, $user->jsonSerialize());
         }
         return collect($users_list);
     }
