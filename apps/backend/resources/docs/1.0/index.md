@@ -1,2 +1,5 @@
 - ## Get Started
-    - [Overview](/{{route}}/{{version}}/overview)
+    - [Overview](/api/docs/{{version}}/overview)
+- ## Users Api 
+    - [List](/api/docs/{{version}}/users/list_user)
+    - [Register](/api/docs/{{version}}/users/register_user)
