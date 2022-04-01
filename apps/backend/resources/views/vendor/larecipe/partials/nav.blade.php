@@ -27,8 +27,12 @@
                 </larecipe-button>
             @endif
 
-            <larecipe-button tag="a" href="https://github.com/saleem-hadad/larecipe" target="__blank" type="black" class="mx-2 px-4">
-                <i class="fab fa-github"></i>
+            <larecipe-button tag="a" href="https://github.com/philipretl/kibernum-techincal-test-back" target="__blank" type="black" class="mx-2 px-4">
+                Go to backend code <i class="fab fa-github"></i>
+            </larecipe-button>
+
+            <larecipe-button tag="a" href="https://github.com/philipretl/kibernum-techincal-test-frontend" target="__blank" type="info" class="mx-2 px-4">
+                Go to frontend code <i class="fab fa-github"></i>
             </larecipe-button>
 
             {{-- versions dropdown --}}

@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Contracts\ExternalServices;
+use stdClass;
 
 interface UsersServiceHandler {
 
-    public function getListFromExternalService();
-    public function saveUserInExternalService($data);
+    public function getListFromExternalService():array;
+    public function saveUserInExternalService(array $data):stdClass;
 
 }

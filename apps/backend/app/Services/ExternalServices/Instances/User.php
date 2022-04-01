@@ -4,8 +4,12 @@ namespace App\Services\ExternalServices\Instances;
 
 class User
 {
-    private string $name;
-    private string $created_at;
-    private string $id;
-    private string $avatar;
+
+
+    public function __construct(
+        private string $name,
+        private String $created_at,
+        private string $id,
+        private string $avatar,
+    ){}
 }
