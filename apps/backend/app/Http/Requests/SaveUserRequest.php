@@ -27,7 +27,7 @@ class SaveUserRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'avatar' => ['required']
+            'avatar' => ['required', 'url']
         ];
     }
 
