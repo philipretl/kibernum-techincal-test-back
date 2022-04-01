@@ -204,5 +204,5 @@ return [
                 'replacement' => '<code-block>',
             ]
         ]
-    ]
+    ],
 ];
