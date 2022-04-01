@@ -145,13 +145,14 @@ class UserServiceTest extends TestCase
      */
     public function it_checks_when_the_fields_required_is_not_present()
     {
+        $data = [];
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
         ])->json(
             'POST',
             $this->url . '/register',
-            []
+            $data
         );
 
         $response->assertStatus(400)
@@ -187,15 +188,16 @@ class UserServiceTest extends TestCase
     public function it_checks_when_the_field_is_not_a_valid_url()
     {
 
+        $data =   [
+            'name' => $this->faker->name(),
+            'avatar' => 'it_is_not_valid_url',
+        ];
+
         $response = $this->withHeaders([
             'Accept' => 'application/json',
         ])->json(
             'POST',
-            $this->url . '/register',
-            [
-                'name' => $this->faker->name(),
-                'avatar' => 'it_is_not_valid_url',
-            ]
+            $this->url . '/register', $data
         );
 
         $response->assertStatus(400)
@@ -226,21 +228,22 @@ class UserServiceTest extends TestCase
     public function it_checks_when_the_field_name_does_not_have_a_size_max_50()
     {
 
+        $data =  [
+            'name' => $this->faker->text(),
+            'avatar' => $this->faker->imageUrl(
+                360,
+                360,
+                'avatar',
+                true,
+                'profile picture'
+            )
+        ];
+
         $response = $this->withHeaders([
             'Accept' => 'application/json',
         ])->json(
             'POST',
-            $this->url . '/register',
-            [
-                'name' => $this->faker->text(),
-                'avatar' => $this->faker->imageUrl(
-                    360,
-                    360,
-                    'avatar',
-                    true,
-                    'profile picture'
-                )
-            ]
+            $this->url . '/register', $data
         );
 
         $response->assertStatus(400)
@@ -264,4 +267,51 @@ class UserServiceTest extends TestCase
 
             ]);
     }
+
+    /**
+     * @test
+     */
+    public function it_check_if_the_user_was_register_correctly()
+    {
+
+        $data =  [
+            'name' => $this->faker->text(50),
+            'avatar' => $this->faker->imageUrl(
+                360,
+                360,
+                'avatar',
+                true,
+                'profile picture'
+            )
+        ];
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+        ])->json(
+            'POST',
+            $this->url . '/register', $data
+        );
+
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'description' => 'User registered in kibernum technical test correctly.',
+                'errors' => [],
+                'data' => [
+                   'user' => [
+                        'name' => $data['name'],
+                        'avatar' => $data['avatar']
+                   ]
+                ],
+                'messages' => [
+                    [
+                        'message_code' => 'REGISTERED',
+                        'message' => 'Process completed.',
+                    ],
+                ],
+
+            ]);
+
+    }
+
 }

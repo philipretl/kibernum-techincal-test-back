@@ -26,7 +26,7 @@ class SaveUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
+            'name' => ['required', 'max:50'],
             'avatar' => ['required', 'url']
         ];
     }
