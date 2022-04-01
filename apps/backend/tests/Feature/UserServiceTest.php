@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Contracts\ExternalServices\UsersServiceHandler;
 use App\Contracts\UsersService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -144,7 +143,8 @@ class UserServiceTest extends TestCase
     /**
      * @test
      */
-    public function it_checks_when_the_fields_required_is_not_present(){
+    public function it_checks_when_the_fields_required_is_not_present()
+    {
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
@@ -184,7 +184,8 @@ class UserServiceTest extends TestCase
     /**
      * @test
      */
-    public function it_checks_when_the_field_is_not_a_valid_url(){
+    public function it_checks_when_the_field_is_not_a_valid_url()
+    {
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
@@ -207,6 +208,51 @@ class UserServiceTest extends TestCase
                         'error_code' => 'URL',
                         'field' => 'avatar',
                         'message' => 'The avatar format is invalid.',
+                    ],
+                ],
+                'messages' => [
+                    [
+                        'message_code' => 'CHECK_DATA',
+                        'message' => 'The form has errors whit the inputs.',
+                    ],
+                ],
+
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_checks_when_the_field_name_does_not_have_a_size_max_50()
+    {
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+        ])->json(
+            'POST',
+            $this->url . '/register',
+            [
+                'name' => $this->faker->text(),
+                'avatar' => $this->faker->imageUrl(
+                    360,
+                    360,
+                    'avatar',
+                    true,
+                    'profile picture'
+                )
+            ]
+        );
+
+        $response->assertStatus(400)
+            ->assertJson([
+                'success' => false,
+                'description' => 'Exist conflict with the request, please check the errors or messages.',
+                'data' => [],
+                'errors' => [
+                    [
+                        'error_code' => 'MAX_STRING',
+                        'field' => 'name',
+                        'message' => 'The name may not be greater than 50 characters.',
                     ],
                 ],
                 'messages' => [

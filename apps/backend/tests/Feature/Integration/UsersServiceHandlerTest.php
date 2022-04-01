@@ -2,12 +2,8 @@
 
 namespace Tests\Feature\Integration;
 
-use App\Services\ExternalServices\Instances\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Collection;
 use Tests\TestCase;
-use Illuminate\Support\Facades\Http;
 use App\Contracts\ExternalServices\UsersServiceHandler;
 
 class UsersServiceHandlerTest extends TestCase
@@ -16,7 +12,8 @@ class UsersServiceHandlerTest extends TestCase
 
     protected UsersServiceHandler $users_service_handler;
 
-    public function setUp():void{
+    public function setUp(): void
+    {
         parent::setUp();
 
         /**
@@ -32,7 +29,7 @@ class UsersServiceHandlerTest extends TestCase
     {
         $users_list = $this->users_service_handler->getListFromExternalService();
 
-        if(count($users_list) !== 0 ){
+        if (count($users_list) !== 0) {
             $this->assertInstanceOf(\stdClass::class, $users_list[0]);
             $this->assertObjectHasAttribute('id', $users_list[0]);
             $this->assertObjectHasAttribute('name', $users_list[0]);
@@ -47,11 +44,18 @@ class UsersServiceHandlerTest extends TestCase
      * @test
      */
 
-    public function it_checks_when_save_the_user_in_the_external_service(){
+    public function it_checks_when_save_the_user_in_the_external_service()
+    {
 
         $data = [
-          'name' => $this->faker->name(),
-          'avatar' =>   $this->faker->imageUrl(360, 360, 'avatar', true, 'profile picture')
+            'name' => $this->faker->name(),
+            'avatar' => $this->faker->imageUrl(
+                360,
+                360,
+                'avatar',
+                true,
+                'profile picture'
+            )
         ];
 
         $user_data = $this->users_service_handler->saveUserInExternalService($data);
