@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Contracts\ExternalServices\UsersServiceHandler;
+use App\Contracts\UsersService;
 use App\Services\ExternalServices\UsersServiceHandlerImpl;
+use App\Services\UsersServiceImpl;
 use Illuminate\Support\ServiceProvider;
 
 class ServicesProvider extends ServiceProvider
@@ -26,5 +28,6 @@ class ServicesProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(UsersServiceHandler::class, UsersServiceHandlerImpl::class);
+        $this->app->bind(UsersService::class, UsersServiceImpl::class);
     }
 }

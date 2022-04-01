@@ -2,14 +2,20 @@
 
 namespace App\Services\ExternalServices\Instances;
 
-class User
+use Illuminate\Database\Eloquent\JsonEncodingException;
+
+class User implements \JsonSerializable
 {
 
-
     public function __construct(
-        private string $name,
-        private String $created_at,
         private string $id,
+        private string $name,
         private string $avatar,
+        private String $created_at,
     ){}
+
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
 }
