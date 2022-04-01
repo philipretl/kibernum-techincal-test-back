@@ -1,10 +1,11 @@
+<p align="center"><a href="https://colombia.kibernum.com/"><img src="	https://colombia.kibernum.com/wp-content/uploads/2019/10/logo-kibernum-nuevo-servicios-2.png" width="300" alt="Mallpty"></a>
+</p>
+
+*** 
+
 # API Docs Kibernum Technical Test 
 
-<larecipe-card shadow>
-    Welcome to the API Documentation
-</larecipe-card>
-
-This Api Rest uses [Venoudev Results](https://github.com/venoudev/results) for json structure response and app architecture with Services, Actions and Validators.
+This Api Rest uses [Venoudev Results package](https://github.com/venoudev/results) for json structure response and app architecture with Services, Actions and Validators.
 
 |Json Response Structure|
 |:-|

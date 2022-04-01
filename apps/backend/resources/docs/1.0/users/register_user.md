@@ -1,18 +1,28 @@
-<p align="center"><a href="https://venoudev.com/"><img src="https://venoudev.com/img/venoudev-2.png" width="200" alt="Mallpty"></a>
+<p align="center"><a href="https://colombia.kibernum.com/"><img src="	https://colombia.kibernum.com/wp-content/uploads/2019/10/logo-kibernum-nuevo-servicios-2.png" width="300" alt="Mallpty"></a>
 </p>
 
-# API Docs  Register owner.
-### It allows to register a new owner in 4 ruedas.
+*** 
+
+# API Docs register user.
+
 - [Base Url](#base_url)
 - [Request Parameters](#request_parameters)
 - [Responses](#response)
 - [Success Responses](#success)
+- [Error Responses](#error)
 
 <a name="base_url"></a>
 ## Base Url
+### This depends on the url of your project if it is production or local development
 
+### Local with docker
 ```text
-https://4ruedas.venoudev.com
+http://localhost:8082
+```
+
+### Test
+```text
+https://kibernum-back.venoudev.com
 ```
 
 <a name="request_parameters"></a>
@@ -22,7 +32,7 @@ https://4ruedas.venoudev.com
 
 |Method|URI|
 |:-|:-|:-|
-|POST|`/api/v1/owner/register`|
+|POST|`/api/v1/users/register`|
 
 |Headers|
 |:-|
@@ -33,8 +43,7 @@ https://4ruedas.venoudev.com
 ```json
 {
     "name"         : "string", 
-    "last_name"    : "string",
-    "dni"          : "numeric"
+    "avatar"       : "url"
 }
 ```
 
@@ -44,7 +53,12 @@ https://4ruedas.venoudev.com
 
 <a name="success"></a>
 
-> {success} Success Response
+> {success} Success Responses
+
+## Response possibility #1
+
+<larecipe-progress type="success" :value="100"></larecipe-progress>
+
 
 ###Code `200` `Ok`
 
@@ -55,11 +69,11 @@ https://4ruedas.venoudev.com
     "success" : true,
     "description": "Owner registered in 4 ruedas successfully.",
     "data" : {
-        "owner":{
-            "id":1,
-            "full_name":"Juan Perez",
-            "dni" : 1061737094
-            
+        "user":{
+            "id": "92",
+            "name": "Andres",
+            "avatar": "https://i.pravatar.cc/300",
+            "created_at": "2022-04-01T11:33:26.528Z"
         },
         "errors":[],
         "messages":[
@@ -81,7 +95,12 @@ https://4ruedas.venoudev.com
 
 <a name="error"></a>
 
-> {danger} Error Response
+> {danger} Error Responses
+
+## Response possibility #1
+
+<larecipe-progress type="danger" :value="100"></larecipe-progress>
+
 
 ###Code `400` `Bad Request`
 
@@ -116,10 +135,9 @@ https://4ruedas.venoudev.com
 |error_code|field|message|
 |:-|:-|:-|
 |`REQUIRED`|`name`|The name field is required.|
-|`REQUIRED`|`last_name`|The last name field is required.|
-|`REQUIRED`|`dni`|The dni field is required.|
-|`UNIQUE`|`dni`|The dni has al ready been taken.|
-|`NUMERIC`|`dni`|The dni must be a number.|
+|`REQUIRED`|`avatar`|The avatar field is required.|
+|`URL`|`avatar`|The avatar format is invalid.|
+|`MAX_STRING`|`name`|The name may not be greater than 50 characters.|
 
 
 

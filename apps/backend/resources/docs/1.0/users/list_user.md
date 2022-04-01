@@ -1,18 +1,26 @@
-<p align="center"><a href="https://venoudev.com/"><img src="https://venoudev.com/img/venoudev-2.png" width="200" alt="Mallpty"></a>
+<p align="center"><a href="https://colombia.kibernum.com/"><img src="	https://colombia.kibernum.com/wp-content/uploads/2019/10/logo-kibernum-nuevo-servicios-2.png" width="300" alt="Mallpty"></a>
 </p>
 
-# API Docs list  owners.
-### List registered owners in 4 ruedas.
+*** 
+# API Docs list users.
+
 - [Base Url](#base_url)
 - [Request Parameters](#request_parameters)
 - [Responses](#response)
 - [Success Responses](#success)
 
 <a name="base_url"></a>
-## Base Url
+## Base Url 
+### This depends on the url of your project if it is production or local development
 
+### Local with docker
 ```text
-https://4ruedas.venoudev.com
+http://localhost:8082
+```
+
+### Test
+```text
+https://kibernum-back.venoudev.com
 ```
 
 <a name="request_parameters"></a>
@@ -22,7 +30,7 @@ https://4ruedas.venoudev.com
 
 |Method|URI|
 |:-|:-|:-|
-|GET|`/api/v1/owner/list`|
+|GET|`/api/v1/users/list`|
 
 |Headers|
 |:-|
@@ -34,7 +42,11 @@ https://4ruedas.venoudev.com
 
 <a name="success"></a>
 
-> {success} Success Response
+> {success} Success Responses
+
+## Response possibility #1
+
+<larecipe-progress type="success" :value="100"></larecipe-progress>
 
 ###Code `200` `Ok`
 
@@ -43,7 +55,7 @@ https://4ruedas.venoudev.com
 ```json
 {
     "success": true,
-    "description": "Empty list of owners registered in 4 ruedas.",
+    "description": "Empty list of users in kibernum technical test.",
     "data": {},
     "errors": [],
     "messages": [
@@ -62,6 +74,12 @@ https://4ruedas.venoudev.com
 |:-|:-|
 |`EMPTY_LIST`|Empty model list solicited.|
 
+
+## Response possibility #2
+
+<larecipe-progress type="success" :value="100"></larecipe-progress>
+
+
 ###Code `200` `Ok`
 
 ###Content
@@ -69,48 +87,28 @@ https://4ruedas.venoudev.com
 ```json
 {
       "success": true,
-      "description": "List of owners registered in 4 ruedas.",
+      "description": "List of users in kibernum technical test.",
       "data": {
-        "owners_paginated": {
-          "owners": [
-            {
-              "id": 1,
-              "full_name": "Prof. Boris Morissette  Murazik",
-              "dni": 548431692
-            },
-            {
-              "id": 2,
-              "full_name": "Mr. Gerard Carroll II  Howell",
-              "dni": 138593069
-            },
-            {
-              "id": 3,
-              "full_name": "Frederik Kilback  Greenholt",
-              "dni": 363005147
-            }
+          "users":[
+              {
+                  "id": "1",
+                  "name": "Juan",
+                  "avatar": "https://avatars.dicebear.com/api/adventurer-neutral/juan.svg",
+                  "created_at": "2022-04-01T05:59:10.185Z"
+              },
+              {
+                  "id": "2",
+                  "name": "Juan Pablo",
+                  "avatar": "https://avatars.dicebear.com/api/adventurer-neutral/pablo.svg",
+                  "created_at": "2022-04-01T01:03:12.818Z"
+              }
           ]
-          "meta": {
-            "current_page": 1,
-            "from": 1,
-            "last_page": 1,
-            "path": "http://4ruedas.venoudev.com/api/v1/users/list",
-            "per_page": 15,
-            "to": 3,
-            "total": 3
-          },
-          "links": {
-            "first": "http://4ruedas.venoudev.com/api/v1/users/list?page=1",
-            "last": "http://4ruedas.venoudev.com/api/v1/users/list?page=1",
-            "prev": null,
-            "next": null
-          }
-        }
       },
       "errors": [],
       "messages": [
         {
-          "message_code": "PAGINATED_LIST"
-          "message": "Paginated model list"
+          "message_code": "SIMPLE_LIST",
+          "message": "Simple data list."
         }
       ]
 }
@@ -121,6 +119,7 @@ https://4ruedas.venoudev.com
 
 |message_code|message|
 |:-|:-|
-|`PAGINATED_LIST`|Paginated model list.|
+|`SIMPLE_LIST`|Simple data list.|
 
+---
 

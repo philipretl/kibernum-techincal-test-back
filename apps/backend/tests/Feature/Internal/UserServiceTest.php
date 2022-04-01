@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Internal;
 
 use App\Contracts\ExternalServices\UsersServiceHandler;
 use App\Contracts\UsersService;
