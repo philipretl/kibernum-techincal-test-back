@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fa9826399eaebf107dfe86f084e5014",
+    "content-hash": "3f87059bbab58f3d3e09e0c46074cad2",
     "packages": [
         {
             "name": "binarytorch/larecipe",
@@ -5099,6 +5099,69 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.4"
             },
             "time": "2021-12-08T09:12:39+00:00"
+        },
+        {
+            "name": "venoudev/results",
+            "version": "0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/venoudev/results.git",
+                "reference": "c03c70a2878bea8c5e8c8d5937df8bb879fe1d28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/venoudev/results/zipball/c03c70a2878bea8c5e8c8d5937df8bb879fe1d28",
+                "reference": "c03c70a2878bea8c5e8c8d5937df8bb879fe1d28",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^7.0|^8.0|^9.0",
+                "illuminate/http": "^7.0|^8.0|^9.0",
+                "illuminate/support": "^7.0|^8.0|^9.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Venoudev\\Results\\Providers\\ResultsServiceProvider"
+                    ],
+                    "aliases": {
+                        "ResultManager": "Venoudev\\Results\\Facades\\ResultManagerFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Venoudev\\Results\\": "src/"
+                },
+                "classmap": []
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "philipretl",
+                    "email": "philipretl@gmail.com"
+                }
+            ],
+            "description": "An awesome package for construct a very understandable Json structure response in your Laravel or Lumen project for your API Rest.",
+            "keywords": [
+                "api",
+                "json",
+                "laravel",
+                "lumen",
+                "response",
+                "results",
+                "venoudev"
+            ],
+            "time": "2022-04-01T03:28:01+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
