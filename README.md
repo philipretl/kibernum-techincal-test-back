@@ -1,14 +1,11 @@
-# Legops Docker Project
+# Kibernum Technical Test - Docker Project
 ### by: Andres vega - afelipe.vega@gmail.com
 ### cel : 3012017499
 
 - Instalación => 
   - docker-compose build && docker-compose up -d
-  - docker exec -it legops_back /bin/bash
-  - dentro del contenedor:
+  - docker exec -it kibernum_back /bin/bash
+  - inside of container:
     - composer install
-    - npm install
     - cp .env.example .env
     - php artisan key:generate
-    - php artisan migrate
-    - php artisan queue:work --queue=listeners 
