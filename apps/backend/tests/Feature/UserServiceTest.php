@@ -273,7 +273,6 @@ class UserServiceTest extends TestCase
      */
     public function it_check_if_the_user_was_register_correctly()
     {
-
         $data =  [
             'name' => $this->faker->text(50),
             'avatar' => $this->faker->imageUrl(
@@ -284,6 +283,23 @@ class UserServiceTest extends TestCase
                 'profile picture'
             )
         ];
+
+        $user = new \stdClass();
+        $user->id = 1;
+        $user->name = $data['name'];
+        $user->avatar = $data['avatar'];
+        $user->createdAt = $this->faker->date('Y-m-d');
+
+        $mock_users_service_handler = \Mockery::mock(
+            UsersServiceHandler::class
+        )->makePartial();
+
+
+        $mock_users_service_handler->shouldReceive('saveUserInExternalService')
+            ->andReturn($user);
+
+        $this->app->instance(UsersServiceHandler::class, $mock_users_service_handler);
+
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
@@ -299,8 +315,10 @@ class UserServiceTest extends TestCase
                 'errors' => [],
                 'data' => [
                    'user' => [
+                        'id' => $user->id,
                         'name' => $data['name'],
-                        'avatar' => $data['avatar']
+                        'avatar' => $data['avatar'],
+                        'created_at' => $user->createdAt
                    ]
                 ],
                 'messages' => [

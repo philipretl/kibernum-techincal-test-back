@@ -51,6 +51,19 @@ class UsersController extends Controller
      */
     public function store(SaveUserRequest $request)
     {
-        //
+        $data = $request->only([
+            'name',
+            'avatar'
+        ]);
+
+        $user = $this->users_service->saveUser($data);
+
+        $this->result->success();
+        $this->result->setCode(200);
+        $this->result->addMessage('REGISTERED', 'Process completed.');
+        $this->result->setDescription('User registered in kibernum technical test correctly.');
+        $this->result->addDatum( 'user', $user->jsonSerialize());
+
+        return $this->result->getJsonResponse();
     }
 }
