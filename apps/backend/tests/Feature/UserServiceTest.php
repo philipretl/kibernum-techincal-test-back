@@ -145,8 +145,8 @@ class UserServiceTest extends TestCase
      * @test
      */
     public function it_checks_when_the_fields_required_is_not_present(){
-        $response = $this->withHeaders([
 
+        $response = $this->withHeaders([
             'Accept' => 'application/json',
         ])->json(
             'POST',
@@ -169,6 +169,44 @@ class UserServiceTest extends TestCase
                         'error_code' => 'REQUIRED',
                         'field' => 'avatar',
                         'message' => 'The avatar field is required.',
+                    ],
+                ],
+                'messages' => [
+                    [
+                        'message_code' => 'CHECK_DATA',
+                        'message' => 'The form has errors whit the inputs.',
+                    ],
+                ],
+
+            ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_checks_when_the_field_is_not_a_valid_url(){
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+        ])->json(
+            'POST',
+            $this->url . '/register',
+            [
+                'name' => $this->faker->name(),
+                'avatar' => 'it_is_not_valid_url',
+            ]
+        );
+
+        $response->assertStatus(400)
+            ->assertJson([
+                'success' => false,
+                'description' => 'Exist conflict with the request, please check the errors or messages.',
+                'data' => [],
+                'errors' => [
+                    [
+                        'error_code' => 'URL',
+                        'field' => 'avatar',
+                        'message' => 'The avatar format is invalid.',
                     ],
                 ],
                 'messages' => [
