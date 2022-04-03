@@ -20,7 +20,7 @@ http://localhost:8082
 
 ### Test
 ```text
-https://kibernum-back.venoudev.com
+http://back-kibernum.venoudev.com
 ```
 
 <a name="request_parameters"></a>
