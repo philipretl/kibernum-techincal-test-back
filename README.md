@@ -27,3 +27,7 @@
       - php artisan test --filter 'Tests\\Feature\\Integration'
     - Internal Feature Test => 
       - php artisan test --filter 'Tests\\Feature\\Internal'
+      
+
+- Access to Project =>
+  - go to http://localhost:8082
